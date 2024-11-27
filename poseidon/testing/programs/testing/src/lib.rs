@@ -1,9 +1,8 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{
-    token::{TokenAccount, Mint, Token},
-    associated_token::AssociatedToken,
+    token::{Token, Mint},
     metadata::{
-        CreateMetadataAccountsV3, Metadata, mpl_token_metadata,
+        mpl_token_metadata, Metadata, CreateMetadataAccountsV3,
         create_metadata_accounts_v3,
     },
 };
@@ -67,16 +66,8 @@ pub struct CreateTokenMintContext<'info> {
         mint::freeze_authority = payer,
     )]
     pub mint_account: Account<'info, Mint>,
-    #[account(
-        init,
-        payer = payer,
-        associated_token::mint = mint_account,
-        associated_token::authority = payer,
-    )]
-    pub hel: Account<'info, TokenAccount>,
     #[account(mut)]
     pub payer: Signer<'info>,
-    pub associated_token_program: Program<'info, AssociatedToken>,
     pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
     pub token_metadata_program: Program<'info, Metadata>,

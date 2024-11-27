@@ -31,19 +31,18 @@ export default class TestingProgram {
 
   createTokenMint(
     key: Pubkey,
-    // address_data: AddressData,
     payer: Signer,
     mint_account: Mint,
-    metadata_account: Metadata, // we don't use this account we just pass it in to specify that we are using the metadata account , the address validation will be handled automatically by poseidon
+    metadata_account: Metadata, 
     token_decimals:u8,
     token_name: String<20>,
     token_symbol: String<15>,
     token_uri: String<100>,
     seller_fee_basis_points: u16,
-    hel: AssociatedTokenAccount
     // remaining: u64,
     // total: u64
   ) {
+
     // let coded = "COD3D"
     // SolanaProgram.msg("HELLO THIS IS ME SPEAKING");
     // SolanaProgram.msg(`this is the new string ${coded}`);
@@ -101,16 +100,6 @@ export default class TestingProgram {
 //   new u64(9921928)
 // )
 
-// test whether we can use system program for constraints
-
-// for parsing options we will use a Vec<TokenStream> option_state that conditional pushes and
-// in the quote template it somehow expands its contents , use the seed example for reference
-//pseudo code
-// match None => optionstate.push(quote!{None})
-// match some => optionState.push(quote!{Collection{verified , pubkey}})
-
-//remove the ident args for 4, 5 ,6
-
 // new DataV2(
 //   token_name,
 //   token_symbol,
@@ -129,5 +118,3 @@ export default class TestingProgram {
 //   address: String<20>;
 //   accountBump: u8;
 // }
-
-// if account is if type Metadata then add token_metadata_program.key().as_ref()to the list of seeds , and seeds::program = token_metadata_program.key(),
