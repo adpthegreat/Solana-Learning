@@ -53,9 +53,10 @@ describe("Bankrun example", async () => {
     symbol: "GOLDSOL",
     uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
   };
+
   before(async () => {
     //Transfer SOL to the user account to cover rent
-    const transferInstruction = SystemProgram.transfer({
+    const transferInstruction1 = SystemProgram.transfer({
       fromPubkey: payer.publicKey,
       toPubkey: mintKeypair1.publicKey,
       lamports: 2 * LAMPORTS_PER_SOL,
@@ -64,18 +65,15 @@ describe("Bankrun example", async () => {
     await createAndProcessTransaction(
       context.banksClient,
       payer.payer,
-      transferInstruction,
+      transferInstruction1,
       [payer.payer]
     );
-    const userBalance = await context.banksClient.getBalance(
+    const userBalance1 = await context.banksClient.getBalance(
       mintKeypair1.publicKey
     );
-    console.log(`User balance after funding: ${userBalance}`);
-  });
-
-  before(async () => {
+    console.log(`User balance after funding: ${userBalance1}`);
     //Transfer SOL to the user account to cover rent
-    const transferInstruction = SystemProgram.transfer({
+    const transferInstruction2 = SystemProgram.transfer({
       fromPubkey: payer.publicKey,
       toPubkey: mintKeypair2.publicKey,
       lamports: 2 * LAMPORTS_PER_SOL,
@@ -84,13 +82,13 @@ describe("Bankrun example", async () => {
     await createAndProcessTransaction(
       context.banksClient,
       payer.payer,
-      transferInstruction,
+      transferInstruction2,
       [payer.payer]
     );
-    const userBalance = await context.banksClient.getBalance(
+    const userBalance2 = await context.banksClient.getBalance(
       mintKeypair2.publicKey
     );
-    console.log(`User balance after funding: ${userBalance}`);
+    console.log(`User balance after funding: ${userBalance2}`);
   });
 
 
@@ -142,6 +140,5 @@ describe("Bankrun example", async () => {
   });
 });
 
-// for the test to work you first have to run 
-//solana program dump metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s mpl_token_metadata.so
+// for the test to work you first have to run the script dump.sh 
 // to dump a copy of the metadata program locally 
